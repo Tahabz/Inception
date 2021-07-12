@@ -21,5 +21,3 @@ COPY ./ssl-params.conf /etc/nginx/snippets/
 COPY ./localhost /etc/nginx/sites-available/
 
 RUN apt-get update && apt-get install -y curl
-
-# CMD ["service", "nginx", "start"]
