@@ -7,6 +7,9 @@ services:
             - 80:80
             - 443:443
         command: nginx -g 'daemon off;'
+        volumes: 
+            - ./nginx:/var/www/localhost/html
     wordpress:
         build: ./wordpress
         command: php-fpm7.3 -F -R
+

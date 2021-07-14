@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y \
 
 
 RUN mkdir -p /var/www/localhost/html
-RUN echo "<h1>Hello World</h1>" > /var/www/localhost/html/index.html
+# RUN echo "<h1>Hello World</h1>" > /var/www/localhost/html/index.html
 RUN ln -s /etc/nginx/sites-available/localhost /etc/nginx/sites-enabled/
 RUN sed -i 's/# server_names_hash_bucket_size 64;/server_names_hash_bucket_size 64;/g' /etc/nginx/nginx.conf 
 
