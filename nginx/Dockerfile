@@ -19,5 +19,3 @@ RUN openssl dhparam -out /etc/nginx/dhparam.pem 100
 COPY ./self-signed.conf /etc/nginx/snippets/
 COPY ./ssl-params.conf /etc/nginx/snippets/
 COPY ./localhost /etc/nginx/sites-available/
-
-RUN apt-get update && apt-get install -y curl
