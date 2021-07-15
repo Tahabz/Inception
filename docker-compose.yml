@@ -8,8 +8,15 @@ services:
             - 443:443
         command: nginx -g 'daemon off;'
         volumes: 
-            - ./nginx:/var/www/localhost/html
+            - ./wordpress/wp:/var/www/localhost/html
+    mariadb:
+        build: ./mariadb        
+        command: mysqld_safe
     wordpress:
         build: ./wordpress
         command: php-fpm7.3 -F -R
+        volumes:
+            - ./wordpress/wp:/wp
+        # depends_on:
+        #     - mariadb
 
