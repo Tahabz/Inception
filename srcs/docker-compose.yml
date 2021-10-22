@@ -1,6 +1,13 @@
 version: '3'
 
 services: 
+  redis:
+    build: redis/
+    image: redis
+    restart: unless-stopped
+    networks:
+        - connect
+
   nginx:
     restart: unless-stopped
     env_file: 
@@ -24,6 +31,7 @@ services:
       - connect
     depends_on:
       - mariadb
+      - redis
     build: wordpress/
     image: wordpress
     volumes:
