@@ -1,0 +1,70 @@
+version: '3'
+
+services: 
+  nginx:
+    restart: unless-stopped
+    env_file: 
+      - .env
+    networks: 
+      - connect
+    depends_on:
+      - wordpress
+    build: nginx/
+    image: nginx
+    ports:
+      - "443:443"
+    volumes:
+      - wp-data:/www
+
+  wordpress:
+    restart: unless-stopped
+    env_file: 
+      - .env
+    networks: 
+      - connect
+    depends_on:
+      - mariadb
+    build: wordpress/
+    image: wordpress
+    volumes:
+      - wp-data:/www
+
+  mariadb:
+    restart: unless-stopped
+    env_file: 
+      - .env
+    networks: 
+      - connect
+    build: mariadb/
+    image: maria
+    volumes: 
+      - mdb-data:/var/lib/mysql
+  
+  adminer:
+    restart: unless-stopped
+    env_file: 
+      - .env
+    networks: 
+      - connect
+    ports:
+      - "5555:5555"
+    build: adminer/
+    image: adminer
+
+volumes:
+    wp-data:
+      driver: local
+      driver_opts:
+          type: none
+          device: "/home/mobaz/data/wp-data"
+          o: bind
+    mdb-data:
+      driver: local
+      driver_opts:
+        type: none
+        device: "/home/mobaz/data/db-data"
+        o: bind
+
+networks:
+  connect:
+    driver: bridge
