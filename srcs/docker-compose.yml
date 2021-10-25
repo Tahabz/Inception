@@ -60,16 +60,18 @@ services:
         - connect
 
   ftp:
+    build: requirements/bonus/ftp/
     restart: unless-stopped
+    image: ftp
     env_file:
-      - .env
+        - .env
+    volumes:
+        - wp-data:/home/user
+    ports:
+        - "21:21"
+        - "10000:10000"
     networks: 
       - connect
-    ports:
-      - "21:21"
-      - "10000:10000"
-    build: requirements/bonus/ftp/
-    image: ftp
 
 volumes:
     wp-data:
