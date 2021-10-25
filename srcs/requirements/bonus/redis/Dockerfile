@@ -1,5 +1,5 @@
-FROM alpine
+FROM debian:buster
 
-RUN apk add redis
+RUN apt update && apt install redis -y
 
 CMD ["redis-server", "--protected-mode no"]

@@ -1,6 +1,6 @@
 version: '3'
 
-services: 
+services:
   nginx:
     restart: unless-stopped
     env_file: 
@@ -58,6 +58,18 @@ services:
     restart: unless-stopped
     networks:
         - connect
+
+  ftp:
+    restart: unless-stopped
+    env_file:
+      - .env
+    networks: 
+      - connect
+    ports:
+      - "21:21"
+      - "10000:10000"
+    build: requirements/bonus/ftp/
+    image: ftp
 
 volumes:
     wp-data:

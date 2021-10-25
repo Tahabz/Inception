@@ -1,8 +1,5 @@
-wget https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar -O /usr/local/bin/wp
-chmod +x /usr/local/bin/wp
-wp core download --allow-root
-
 if [ ! -f "/www/wp-config.php" ]; then
+	wp core download --allow-root
 	wp config create --dbname="$DB_NAME" --dbuser="$DB_USER" --dbpass="$DB_PASS" --dbhost=$DB_HOST --path="/www" --dbprefix=wp_ --allow-root
 	wp config set WP_REDIS_HOST 'redis' --path="/www" --allow-root
 	wp config set WP_REDIS_PORT 6379 --path="/www" --allow-root

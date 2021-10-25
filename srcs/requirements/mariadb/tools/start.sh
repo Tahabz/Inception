@@ -15,12 +15,15 @@ mysql -e "CREATE USER '${DB_USER}'@'%' identified by '${DB_PASS}';"
 mysql -e "GRANT ALL PRIVILEGES ON ${DB_NAME}.* TO '${DB_USER}'@'%' IDENTIFIED BY '${DB_PASS}'"
 mysql -e "FLUSH PRIVILEGES;"
 
-
 mysql ${DB_NAME} < /wp.sql
 
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'toor';"
+mysql -e "CREATE USER 'root'@'%' identified by 'toor';"
+mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'toor'"
 mysql -e "FLUSH PRIVILEGES;"
 
-service mysql stop
+mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'toor';"
+mysql -uroot -ptoor -e "FLUSH PRIVILEGES;"
+
+mysqladmin -u root -ptoor shutdown
 
 mysqld_safe
