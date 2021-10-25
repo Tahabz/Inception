@@ -72,6 +72,15 @@ services:
         - "10000:10000"
     networks: 
       - connect
+  
+  website:
+    restart: unless-stopped
+    env_file:
+      - .env
+    build: requirements/bonus/website/
+    image: website
+    ports:
+      - "4444:4444"
 
 volumes:
     wp-data:

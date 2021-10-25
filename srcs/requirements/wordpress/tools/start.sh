@@ -8,7 +8,7 @@ if [ ! -f "/www/wp-config.php" ]; then
 	wp config set WP_REDIS_DATABASE 0 --path="/www" --allow-root
 fi
 
-wp core install --url="10.11.44.241" --title="$WP_TITLE" --admin_user="$WP_ADMIN" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_EMAIL" --path="/www" --allow-root
+wp core install --url="${DOMAIN_NAME}" --title="$WP_TITLE" --admin_user="$WP_ADMIN" --admin_password="$WP_ADMIN_PASS" --admin_email="$WP_ADMIN_EMAIL" --path="/www" --allow-root
 wp plugin install redis-cache --path="/www" --activate --allow-root
 cp /www/wp-content/plugins/redis-cache/includes/object-cache.php /www/wp-content
 
