@@ -66,7 +66,7 @@ services:
     env_file:
         - .env
     volumes:
-        - wp-data:/home/user
+        - wp-data:/home/mobaz
     ports:
         - "21:21"
         - "10000:10000"
