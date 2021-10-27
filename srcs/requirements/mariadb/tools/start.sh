@@ -17,13 +17,9 @@ mysql -e "FLUSH PRIVILEGES;"
 
 mysql ${DB_NAME} < /wp.sql
 
-mysql -e "CREATE USER 'root'@'%' identified by 'toor';"
-mysql -e "GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' IDENTIFIED BY 'toor'"
-mysql -e "FLUSH PRIVILEGES;"
+mysql -e "ALTER USER '${ROOT_USER}'@'localhost' IDENTIFIED BY '${ROOT_PASS}';"
+mysql -u$ROOT_USER -p$ROOT_PASS -e "FLUSH PRIVILEGES;"
 
-mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'toor';"
-mysql -uroot -ptoor -e "FLUSH PRIVILEGES;"
-
-mysqladmin -u root -ptoor shutdown
+mysqladmin -u $ROOT_USER -p$ROOT_PASS shutdown
 
 mysqld_safe
